@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron home-jumbo text-center my-2" >
+    </div>
+    <div class="row">
+        <div class="mx-auto">
+            <h2>Podaj ilość: </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mx-auto">
+            <form method="post" th:action="@{/addQuantityAction/{id} (id = ${productId})}">
+                <td>
+                    <input type="number" value="1" min="1" th:name="quantity">
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary" ><i class="fas fa-plus"></i></button>
+                </td>
+            </form>
+        </div>
+    </div>
+    <div class="row" >
+        <div th:if="${message}" class="mx-auto">
+            <h2 th:text=" ${message}"></h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mx-auto">
+            <a class="btn btn-primary text-white" th:href="@{/products}">Wróc do produktów</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

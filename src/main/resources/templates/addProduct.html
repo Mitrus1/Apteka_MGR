@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Dodaj produkt</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron home-jumbo">
+        <div class="container text-center text-black jumbo-container font-weight-bold">
+            <h1 class="display-1">DODAJ PRODUKT</h1>
+        </div>
+    </div>
+    <div class="row">
+        <form class="mx-auto col-10 col-md-6" th:action="@{/addProductAction}" th:object="${product}" method="post">
+            <div class="form-group">
+                <label for="nameInput">Nazwa leku: </label>
+                <input class="form-control" id="nameInput" type="text" placeholder="nazwa" th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <label for="producerInput">Producent leku: </label>
+                <input class="form-control" id="producerInput" type="text" placeholder="producent" th:field="*{producer}">
+            </div>
+            <div class="form-group">
+                <label for="categorySelect">Kategoria: </label>
+                <select class="form-control" id="categorySelect" th:field="*{category.id}">
+                    <option th:each="category: ${categories}" th:value="${category.id}">
+                        <p th:text="${category.name}"></p>
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="amountInput">Ilość: </label>
+                <input class="form-control" id="amountInput" type="number" value="1" min="1" placeholder="ilość" th:field="*{amount}">
+            </div>
+            <div class="form-group">
+                <label for="priceInput">Cena za sztukę: </label>
+                <input class="form-control" id="priceInput" type="text" placeholder="cena" value="0.1" min="0.1" th:field="*{price}">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Dodaj</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="mx-auto">
+            <a th:href="@{/}" class="btn btn-primary text-white">Strona główna</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

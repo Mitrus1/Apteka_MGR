@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Archive</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron home-jumbo">
+        <div class="container text-center text-black jumbo-container font-weight-bold">
+            <h1 class="display-1">PRODUKTY</h1>
+        </div>
+    </div>
+    <div class="col-6 offset-3 font-weight-bold">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Suma kwoty</th>
+                <th scope="col">Data</th>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+            <tr th:each="order:${orders}">
+                <th scope="row" th:text="${order.id}">1</th>
+                <td th:text="${order.sumPrice}">300</td>
+                <td th:text="${#temporals.format(order.finishTime, 'dd-MM-yyyy HH:mm')}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="${orders.isEmpty()}" class="text-center">
+        <h2>Brak zamówień</h2>
+    </div>
+    <br>
+    <div class="text-center">
+        <a th:href="@{/}" class="btn btn-primary text-white">Strona główna</a>
+    </div>
+</div>
+</body>
+</html>

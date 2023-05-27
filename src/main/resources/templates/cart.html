@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron home-jumbo text-center my-2" >
+    </div>
+    <div class="row">
+        <div class="mx-auto">
+            <h2>Obecnie w koszyku: </h2>
+        </div>
+    </div>
+    <div class="col-6 offset-3 font-weight-bold">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Ilość: </th>
+                <th scope="col">Cena za sztukę</th>
+                <th scope="col" class="text-danger"><i class="fas fa-minus-circle"></i></th>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+            <tr th:each="product:${products}">
+                <td th:text="${product.name}">Maść</td>
+                <td th:text="${product.amount}">3</td>
+                <td th:text="${product.price}+' zł'">20</td>
+                <td>
+                    <form method="post" th:action="@{/removeProduct/{id} (id = ${product.id})}">
+                        <button type="submit" class="btn btn-danger" ><i class="fas fa-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="mx-auto">
+            <h2>Suma: </h2>
+            <h2 th:text="${sum}+' zł' "></h2>
+        </div>
+    </div>
+    <div class="row" th:if="${!products.isEmpty()}">
+        <div class="mx-auto">
+            <form method="post" th:action="@{/finishOrder}">
+                <button type="submit" class="btn btn-success text-white">REALIZUJ</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="mx-auto">
+            <a th:href="@{/products}" class="btn btn-dark text-white">Produkty</a>
+            <a th:href="@{/}" class="btn btn-primary text-white">Strona główna</a>
+        </div>
+    </div>
+    <div class="text-center" th:if="${products.isEmpty()}">
+        <h2>Brak produktów</h2>
+    </div>
+</div>
+</body>
+</html>
